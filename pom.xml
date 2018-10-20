@@ -15,6 +15,12 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+        <scm>
+                <connection>scm:git:git@github.com:ross-stockman/eventlogger.git</connection>
+                <developerConnection>scm:git:git@github.com:ross-stockman/eventlogger.git</developerConnection>
+                <url>https://github.com/ross-stockman/eventlogger</url>
+                <tag>v@{project.version}</tag>
+        </scm>
 	<modules>
 		<module>eventlogger</module>
 		<module>eventlogger-samples</module>
