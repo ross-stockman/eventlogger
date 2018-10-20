@@ -17,7 +17,7 @@
                 <connection>scm:git:git@github.com:ross-stockman/eventlogger.git</connection>
                 <developerConnection>scm:git:git@github.com:ross-stockman/eventlogger.git</developerConnection>
                 <url>https://github.com/ross-stockman/eventlogger</url>
-                <tag>v@{project.version}</tag>
+                <tag>@{project.version}</tag>
         </scm>
 	<modules>
 		<module>eventlogger</module>
