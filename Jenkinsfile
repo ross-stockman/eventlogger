@@ -52,11 +52,13 @@ pipeline {
                 expression { params.RELEASE }
             }
             steps {
-                script {
-                    if (env.BRANCH_NAME == 'master') {
-                        sh 'mvn -e -U -B build-helper:parse-version -Dtag=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.incrementalVersion} release:prepare -DreleaseVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.incrementalVersion} -DdevelopmentVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}-SNAPSHOT release:perform'
-                    } else {
-                        error("RELEASE is only permitted on master branch!")   
+                withCredentials([usernamePassword(credentialsId: 'git_user', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    script {
+                        if (env.BRANCH_NAME == 'master') {
+                            sh "mvn -e -U -B build-helper:parse-version -Dtag=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.incrementalVersion} release:prepare -DreleaseVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.incrementalVersion} -DdevelopmentVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${parsedVersion.nextIncrementalVersion}-SNAPSHOT release:perform -Dusername=${username} -Dpassword=${password}"
+                        } else {
+                            error("RELEASE is only permitted on master branch!")   
+                        }
                     }
                 }
             }
